@@ -31,7 +31,7 @@ spec:
                 - name: "docker.env"
                   content: '{{ lookup("file", "docker.env" | abspath("campfire")) | b64encode }}'
                 - name: "docker-compose.yaml"
-                  content: '{{ lookup("file", "docker-compose.yaml" | abspath("spec")) | b64encode }}'
+                  content: '{{ lookup("file", "docker-compose.yml" | abspath("spec")) | b64encode }}'
 
       outputs:
         api_url:

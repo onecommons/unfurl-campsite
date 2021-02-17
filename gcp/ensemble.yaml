@@ -1,0 +1,13 @@
+apiVersion: unfurl/v1alpha1
+kind: Ensemble
++include:
+  file: ensemble-template.yaml
+  repository: spec
+spec:
+  service_template:
+    repositories:
+    # Files that are shared across ensemble instances should be placed in this "spec" repository
+      spec:
+        url: https://github.com/onecommons/unfurl-campsite.git
+      cloud:
+        url: https://github.com/onecommons/unfurl-examples.git#:cloud/gcp

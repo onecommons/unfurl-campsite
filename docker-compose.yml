@@ -1,0 +1,90 @@
+version: "2.4"
+services:
+  api:
+    container_name: campsite-api
+    image: aszs/campsite-api
+#    build: services/api
+    ports:
+      - "1111:1111"
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      auth:
+        condition: service_started
+      event:
+        condition: service_started
+      speaker:
+        condition: service_started
+      session:
+        condition: service_started
+    env_file:
+      - docker.env
+    networks:
+      - app
+  auth:
+    container_name: campsite-auth
+    image: aszs/campsite-auth
+#    build: services/auth
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - docker.env
+    networks:
+      - app
+  speaker:
+    container_name: campsite-speaker
+    image: aszs/campsite-speaker
+#    build: services/speaker
+    restart: always
+    env_file:
+      - docker.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app
+  event:
+    container_name: campsite-event
+    image: aszs/campsite-event
+#    build: services/event
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - docker.env
+    networks:
+      - app
+  session:
+    container_name: campsite-session
+    image: aszs/campsite-session
+#    build: services/session
+    restart: always
+    env_file:
+      - docker.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app
+networks:
+  app:
+    driver: bridge

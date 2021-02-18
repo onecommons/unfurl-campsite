@@ -27,12 +27,13 @@ spec:
           properties:
             portspec: # this will add a firewall rule for this port if needed
               source: 1111
+              target: 1111
             files:
-                - name: "docker.env"
+                - filename: "docker.env"
                   content: '{{ lookup("file", "docker.env" | abspath("campfire")) | b64encode }}'
-                - name: "docker-compose.yaml"
+                - filename: "docker-compose.yaml"
                   content: '{{ lookup("file", "docker-compose.yml" | abspath("spec")) | b64encode }}'
 
       outputs:
         api_url:
-          value: 'http://{{"::compute::public_address" | eval }}:{{"::campsite_service::portspec::source" | eval }}/'
+          value: 'http://{{"::compute::public_address" | eval }}:{{"::campsite_service::portspec::source" | eval }}/api/events'

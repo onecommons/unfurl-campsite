@@ -5,9 +5,9 @@ spec:
     repositories:
       campfire:
         url: https://github.com/dnielsen/campsite
-    imports:
-      - file: compute.yaml
-        repository: cloud
+    +include:
+      file: compute.yaml
+      repository: cloud
 
     topology_template:
       node_templates:

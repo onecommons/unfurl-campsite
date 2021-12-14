@@ -2,7 +2,7 @@
 
 This repository contains an Unfurl project for deploying a demonstration version of [Campsite](https://github.com/dnielsen/campsite) to a compute instance on AWS and Google Cloud.
 
-Unfurl runs on any Linux or Mac machine with Python (2.7 or later) and Git installed. To install it run:
+Unfurl runs on any Linux or Mac machine with Python (3.7 or later) and Git installed. To install it run:
 
 `pip install unfurl`
 

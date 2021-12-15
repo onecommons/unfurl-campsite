@@ -9,7 +9,7 @@ Unfurl runs on any Linux or Mac machine with Python (3.7 or later) and Git insta
 Now you can clone ensembles just like you would clone a git repository.
 To clone it, run:
 
-``unfurl clone https://github.com/onecommons/unfurl_campsite.git``
+``unfurl clone https://github.com/onecommons/unfurl-campsite.git``
 
 
 To deploy your app of AWS or GCP:
